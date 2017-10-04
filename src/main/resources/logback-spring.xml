@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+    	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    		<encoder>
+    			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}:%L - %msg %n
+    			</Pattern>
+    		</encoder>
+    		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+    			<level>INFO</level>
+    		</filter>
+    	</appender>
+
+      	<appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    		<File>logs/transaku.log</File>
+    		<!-- <File>/home/sip-ppid/log/sip_ppid.log</File> -->
+    		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    		    <!-- daily rollover -->
+    			<FileNamePattern>logs/transaku.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+    			<!-- <FileNamePattern>/home/sip-ppid/log/sip-ppid.%d{yyyy-MM-dd}.%i.log</FileNamePattern> -->
+    			
+				<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+					<maxFileSize>20MB</maxFileSize>
+				</timeBasedFileNamingAndTriggeringPolicy>
+    			<!-- keep 30 days' worth of history -->
+    			<maxHistory>30</maxHistory>			
+    		</rollingPolicy>
+
+    		<encoder>
+    			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35}:%L - %msg %n</Pattern>
+    		</encoder> 	    
+      	</appender>
+
+    	<logger name="com.hitzy" additivity="false">
+    	    <level value="INFO" />
+    		<appender-ref ref="dailyRollingFileAppender"/>
+    		<!-- <appender-ref ref="minuteRollingFileAppender"/> -->
+    		<appender-ref ref="consoleAppender" />
+    	</logger>
+
+    	<root>
+    		<level value="INFO" />
+    		<appender-ref ref="consoleAppender" />
+    		<appender-ref ref="dailyRollingFileAppender"/>
+    	</root>
+    </configuration>
