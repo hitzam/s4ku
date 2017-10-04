@@ -17,11 +17,14 @@
 *.zip
 *.tar.gz
 *.rar
+*.iml
+*.7z
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
 logs/
+bin/
 target/
 .classpath
 .project
@@ -29,3 +32,6 @@ target/
 .project
 .mvn/
 .idea/
+nohup.out
+mvnw
+mvnw.cmd
